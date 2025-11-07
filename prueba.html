@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Systems Portfolio | Desarrollador Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-primary: #0af;
+            --neon-secondary: #f0f;
+            --neon-accent: #0f0;
+            --bg-dark: #111;
+            --bg-darker: #080808;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .neon-text {
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary),
+                0 0 40px var(--neon-secondary);
+            color: #fff;
+        }
+
+        .neon-box {
+            border: 2px solid var(--neon-primary);
+            box-shadow: 
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary),
+                inset 0 0 10px var(--neon-primary);
+            transition: all 0.3s ease;
+        }
+
+        .neon-box:hover {
+            box-shadow: 
+                0 0 20px var(--neon-primary),
+                0 0 40px var(--neon-secondary),
+                inset 0 0 20px var(--neon-primary);
+            transform: translateY(-5px);
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary), var(--neon-accent), var(--neon-primary));
+            background-size: 400%;
+            opacity: 0;
+            transition: 0.5s;
+            border-radius: inherit;
+        }
+
+        .glow-effect:hover::before {
+            opacity: 0.8;
+            animation: glowing 4s linear infinite;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
+        }
+
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: var(--bg-darker);
+            margin-top: 0.5rem;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5), rgba(255,255,255,0.1));
+            animation: shining 2s infinite;
+        }
+
+        @keyframes shining {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .project-card {
+            perspective: 1000px;
+        }
+
+        .project-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+
+        .project-card:hover .project-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .project-card-front, .project-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .project-card-back {
+            transform: rotateY(180deg);
+            padding: 1.5rem;
+        }
+
+        /* Efecto de texto parpadeante */
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Animación de latido */
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.05); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Cursor personalizado -->
+    <div id="cursor" class="fixed w-8 h-8 rounded-full border-2 border-neon-primary pointer-events-none transition-transform duration-75 transform -translate-x-1/2 -translate-y-1/2 z-50 mix-blend-difference"></div>
+    
+    <!-- Scroll progress bar -->
+    <div class="fixed top-0 left-0 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 z-50" id="progressBar"></div>
+
+    <!-- Menú de navegación -->
+    <nav class="fixed w-full bg-black bg-opacity-90 backdrop-blur-md z-40 px-6 py-4 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold neon-text">[MY]SYSTEMS</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-white hover:text-cyan-400 transition-colors">Sobre Mí</a>
+                <a href="#skills" class="text-white hover:text-purple-400 transition-colors">Habilidades</a>
+                <a href="#projects" class="text-white hover:text-green-400 transition-colors">Proyectos</a>
+                <a href="#contact" class="text-white hover:text-yellow-400 transition-colors">Contacto</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Menú móvil -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-black bg-opacity-95 backdrop-blur-md px-6 py-4 border-b border-gray-800">
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="text-white hover:text-cyan-400 transition-colors">Sobre Mí</a>
+                <a href="#skills" class="text-white hover:text-purple-400 transition-colors">Habilidades</a>
+                <a href="#projects" class="text-white hover:text-green-400 transition-colors">Proyectos</a>
+                <a href="#contact" class="text-white hover:text-yellow-400 transition-colors">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-70"></div>
+            <img src="https://placehold.co/1920x1080/webp" alt="Fondo futurista con circuitos digitales azules y púrpuras en un fondo oscuro" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 py-20 text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-bold neon-text mb-4 animate__animated animate__fadeInDown">
+                Hola, soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-500">[Nombre]</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto animate__animated animate__fadeIn animate__delay-1s">
+                Desarrollador de sistemas con pasión por crear soluciones innovadoras que hacen la diferencia.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4 animate__animated animate__fadeIn animate__delay-2s">
+                <a href="#projects" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-medium glow-effect">
+                    Ver mis proyectos
+                </a>
+                <a href="#contact" class="px-8 py-3 border-2 border-cyan-500 text-white rounded-full font-medium glow-effect">
+                    Contactame
+                </a>
+            </div>
+            
+            <div class="mt-16 animate__animated animate__fadeIn animate__delay-3s">
+                <a href="#about" class="text-white text-4xl animate-bounce">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Efectos de partículas -->
+        <div id="particles-js" class="absolute inset-0 z-0"></div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section id="about" class="py-20 bg-gradient-to-b from-black to-gray-900 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center neon-text section-title inline-block">
+                Sobre Mí
+            </h2>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="w-full lg:w-1/3 flex justify-center">
+                    <div class="relative neon-box rounded-full p-1">
+                        <img src="https://placehold.co/400x400/webp" alt="Retrato profesional del desarrollador con entorno tecnológico de fondo" class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-gray-900">
+                        <div class="absolute -bottom-2 -right-2 bg-gray-900 rounded-full p-2 border-2 border-cyan-500">
+                            <div class="bg-black rounded-full p-3 text-cyan-500 text-xl">
+                                <i class="fas fa-code"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-2/3">
+                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">¿Quién soy?</h3>
+                    <p class="text-gray-300 mb-6">
+                        Soy un apasionado desarrollador de sistemas con más de [X] años de experiencia en el diseño, implementación y mantenimiento de soluciones tecnológicas innovadoras. Mi enfoque se centra en crear sistemas eficientes, escalables y fáciles de usar.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl neon-box">
+                            <div class="flex items-center mb-4">
+                                <div class="mr-4 text-cyan-500 text-xl">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h4 class="text-xl font-semibold">Educación</h4>
+                            </div>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>Título Universitario en [Tu Carrera]</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>Certificaciones en [Tecnologías relevantes]</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl neon-box">
+                            <div class="flex items-center mb-4">
+                                <div class="mr-4 text-purple-500 text-xl">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <h4 class="text-xl font-semibold">Experiencia</h4>
+                            </div>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>+100 sistemas implementados</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>Especialista en desarrollo seguro</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-700 pt-8">
+                        <h3 class="text-2xl font-bold mb-4 text-purple-400">Mi Filosofía</h3>
+                        <p class="text-gray-300 mb-6">
+                            Creo firmemente que la tecnología debe ser una herramienta para mejorar la vida de las personas. Cada sistema que desarrollo está diseñado con el usuario final en mente, buscando siempre la combinación perfecta entre funcionalidad y experiencia de usuario.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section id="skills" class="py-20 bg-gray-900 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-30"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center neon-text section-title inline-block">
+                Mis Habilidades
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 bg-opacity-70 p-6 rounded-xl neon-box">
+                    <div class="flex items-center mb-4">
+                        <div class="mr-4 text-2xl text-cyan-500">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Desarrollo Frontend</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li>
+                            <div class="flex justify-between">
+                                <span>HTML5</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 100%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>CSS3/Tailwind</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>JavaScript</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>React/Vue</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-70 p-6 rounded-xl neon-box">
+                    <div class="flex items-center mb-4">
+                        <div class="mr-4 text-2xl text-purple-500">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Desarrollo Backend</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li>
+                            <div class="flex justify-between">
+                                <span>Node.js</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>Python/Django</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>PHP/Laravel</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>SQL/NoSQL</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-70 p-6 rounded-xl neon-box">
+                    <div class="flex items-center mb-4">
+                        <div class="mr-4 text-2xl text-green-500">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Otras Habilidades</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li>
+                            <div class="flex justify-between">
+                                <span>Git/GitHub</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>Testing</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>Docker</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%;"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between">
+                                <span>UI/UX Design</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%;"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="projects" class="py-20 bg-black relative">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-b from-cyan-500 to-purple-500 opacity-10"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center neon-text section-title inline-block">
+                Mis Proyectos
+            </h2>
+            
+            <p class="text-center text-gray-400 max-w-3xl mx-auto mb-16">
+                Aquí puedes ver algunos de los sistemas más destacados que he desarrollado a lo largo de mi carrera profesional.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Proyecto 1 -->
+                <div class="project-card h-full">
+                    <div class="project-card-inner h-full">
+                        <div class="project-card-front bg-gray-900 rounded-xl overflow-hidden h-full neon-box">
+                            <img src="https://placehold.co/600x400/webp" alt="Captura de pantalla del sistema de gestión empresarial mostrando paneles de control analíticos" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Sistema de Gestión Empresarial</h3>
+                                <p class="text-gray-400 text-sm mb-4">Plataforma integral para administración de negocios con módulos de inventario, facturación y CRM.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-cyan-400">PHP</span>
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-purple-400">Laravel</span>
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-green-400">MySQL</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card-back bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl h-full neon-box">
+                            <h3 class="text-xl font-semibold mb-4">Detalles del Proyecto</h3>
+                            <ul class="text-gray-300 text-sm space-y-2 mb-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Sistema modular escalable</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Integración con pasarelas de pago</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Reportes analíticos en tiempo real</span>
+                                </li>
+                            </ul>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <a href="#" class="block text-center px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-medium">
+                                    Ver Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 2 -->
+                <div class="project-card h-full">
+                    <div class="project-card-inner h-full">
+                        <div class="project-card-front bg-gray-900 rounded-xl overflow-hidden h-full neon-box">
+                            <img src="https://placehold.co/600x400/webp" alt="Interfaz de la aplicación móvil de salud mostrando gráficos de seguimiento de actividad física" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">HealthTrack App</h3>
+                                <p class="text-gray-400 text-sm mb-4">Aplicación móvil para seguimiento de salud con integración de wearables y análisis predictivo.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-blue-400">React Native</span>
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-green-400">Node.js</span>
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-yellow-400">Firebase</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card-back bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl h-full neon-box">
+                            <h3 class="text-xl font-semibold mb-4">Detalles del Proyecto</h3>
+                            <ul class="text-gray-300 text-sm space-y-2 mb-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Conecta con dispositivos wearables</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Algoritmos de IA para recomendaciones</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Notificaciones personalizadas</span>
+                                </li>
+                            </ul>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <a href="#" class="block text-center px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-medium">
+                                    Ver Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 3 -->
+                <div class="project-card h-full">
+                    <div class="project-card-inner h-full">
+                        <div class="project-card-front bg-gray-900 rounded-xl overflow-hidden h-full neon-box">
+                            <img src="https://placehold.co/600x400/webp" alt="Panel de administración del sistema educativo con lista de cursos y estadísticas" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Plataforma Educativa</h3>
+                                <p class="text-gray-400 text-sm mb-4">Sistema LMS completo con aulas virtuales, evaluaciones automatizadas y seguimiento de progreso.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-green-400">Django</span>
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-blue-400">React</span>
+                                    <span class="px-2 py-1 bg-gray-800 rounded-full text-xs text-purple-400">MongoDB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card-back bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl h-full neon-box">
+                            <h3 class="text-xl font-semibold mb-4">Detalles del Proyecto</h3>
+                            <ul class="text-gray-300 text-sm space-y-2 mb-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Video conferencia integrada</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Creación de cursos interactivos</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Certificaciones automáticas</span>
+                                </li>
+                            </ul>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <a href="#" class="block text-center px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-medium">
+                                    Ver Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button id="load-more" class="px-6 py-3 border-2 border-cyan-500 text-white rounded-full font-medium glow-effect hover:bg-cyan-500 hover:bg-opacity-10 transition-colors">
+                    Cargar Más Proyectos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-gray-900 to-black relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center neon-text section-title inline-block">
+                Contacto
+            </h2>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="w-full lg:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-6 text-cyan-400">¡Hablemos!</h3>
+                    <p class="text-gray-400 mb-8">
+                        Si estás interesado en trabajar conmigo o necesitas desarrollar un sistema a medida, no dudes en contactarme. Estoy disponible para proyectos desafiantes y colaboraciones interesantes.
+                    </p>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-400 mb-2">Nombre</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-colors text-white" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-400 mb-2">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors text-white" required>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-gray-400 mb-2">Asunto</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-green-500 transition-colors text-white" required>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-400 mb-2">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-cyan-500 transition-colors text-white" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-medium glow-effect w-full hover:from-cyan-600 hover:to-purple-600 transition-all">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="w-full lg:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-6 text-purple-400">Información de Contacto</h3>
+                    
+                    <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-box mb-8">
+                        <div class="flex items-start mb-6">
+                            <div class="text-cyan-500 text-xl mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1">Correo Electrónico</h4>
+                                <a href="mailto:contacto@misistemas.com" class="text-gray-400 hover:text-cyan-400 transition-colors">contacto@misistemas.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="text-purple-500 text-xl mr-4 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1">Teléfono</h4>
+                                <a href="tel:+1234567890" class="text-gray-400 hover:text-purple-400 transition-colors">+(123) 456-7890</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-green-500 text-xl mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-1">Ubicación</h4>
+                                <p class="text-gray-400">Ciudad, País</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-semibold mb-6 text-green-400">Sígueme</h3>
+                    
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-xl text-white hover:bg-cyan-500 transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-xl text-white hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-xl text-white hover:bg-blue-400 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-xl text-white hover:bg-purple-500 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold neon-text">[MY]SYSTEMS</a>
+                    <p class="text-gray-500 mt-2">Desarrollo de sistemas a medida con pasión y tecnología.</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <p class="text-gray-500 mb-4">© <span id="current-year"></span> Todos los derechos reservados.</p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-cyan-400 transition-colors">Política de Privacidad</a>
+                        <a href="#" class="text-gray-500 hover:text-purple-400 transition-colors">Términos de Servicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Configuración del cursor personalizado
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        document.querySelectorAll('a, button, input, textarea').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.borderColor = '#0af';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.borderColor = '#0af';
+            });
+        });
+
+        // Barra de progreso de scroll
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Menu móvil
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Efecto de partículas
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#0af", "#f0f", "#0f0"]
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#0af",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Manejo del formulario
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulación de envío exitoso
+            alert('¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.');
+            this.reset();
+        });
+
+        // Año actual en el footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Botón "Cargar más proyectos"
+        document.getElementById('load-more').addEventListener('click', function() {
+            alert('Implementar aquí la carga dinámica de más proyectos desde una API o base de datos.');
+        });
+
+        // Animación al hacer scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.neon-box, .section-title');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

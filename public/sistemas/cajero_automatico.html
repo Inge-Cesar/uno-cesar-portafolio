@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Metadatos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título -->
+    <title>CESAR DEV - ATM</title>
+
+    <!-- Frameworks y bibliotecas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/assets/css/sistemas/sistem.css" />
+</head>
+
+<body class="min-h-screen p-6">
+
+    <!-- Título principal -->
+    <div class="text-center py-12">
+        <h1 class="neon-text text-5xl md:text-7xl font-bold mb-6" style="font-family: 'Press Start 2P', cursive;">
+            SIMULADOR DE CAJERO AUTOMATICO
+        </h1>
+    </div>
+
+    <!-- Sección de descripción y video -->
+    <div class="container mx-auto my-12 grid md:grid-cols-2 gap-8">
+        <!-- Descripción del proyecto -->
+        <div class="neon-box p-6 rounded-lg">
+            <h2 class="neon-text text-3xl mb-4">Descripción del programa</h2>
+            <p class="mb-4 text-gray-300">
+            <p>
+                Simulador de Cajero Automático (ATM) desarrollado en Python utilizando <strong>Tkinter</strong> para la
+                interfaz gráfica y <strong>PIL</strong> para el manejo de imágenes. Implementa estructuras de datos como
+                <strong>pilas</strong> y <strong>colas</strong> bajo una arquitectura <strong>MVC</strong>
+                (Modelo-Vista-Controlador), ofreciendo una estructura organizada, modular y escalable.
+            </p>
+
+            </p>
+            <h3 class="neon-text text-xl mt-6 mb-3">Desarrollo Técnico</h3>
+            <ul class="space-y-2 text-gray-300">
+
+                <li><strong>Lenguaje:</strong> Python</li>
+                <li><strong>Interfaz gráfica:</strong> Tkinter</li>
+                <li><strong>Manejo de imágenes:</strong> PIL (Python Imaging Library)</li>
+                <li><strong>Estructura de datos:</strong> Pilas y colas</li>
+                <li><strong>Funcionalidades:</strong> Operaciones bancarias simuladas (retiros, depósitos,
+                    historial)</li>
+                <li><strong>Arquitectura:</strong> Modelo-Vista-Controlador (MVC)</li>
+
+            </ul>
+        </div>
+
+        <!-- Video del proyecto -->
+        <div class="flex items-center justify-center neon-box rounded-lg p-2">
+            <div class="w-full aspect-video bg-black rounded-md overflow-hidden">
+                <video class="w-full h-full" controls>
+                    <source src="/assets/img/videos/sistemas/atm.mp4" type="video/mp4" />
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <!-- <div class="container mx-auto my-16 flex flex-col md:flex-row justify-center gap-6">
+        <button class="neon-button px-8 py-4 rounded-lg text-xl font-bold mx-auto md:mx-0">
+            VER DEMO EN VIVO
+        </button>
+        <button class="neon-button px-8 py-4 rounded-lg text-xl font-bold mx-auto md:mx-0">
+            DESARROLLAR DESDE CERO
+        </button>
+    </div> -->
+
+    <!-- Guía paso a paso para replicar el proyecto -->
+    <div class="container mx-auto my-16 neon-box p-6 rounded-lg">
+        <h2 class="neon-text text-3xl mb-12 text-center"> ¿Cómo obtener el codigo fuente?</h2>
+
+        <div class="grid md:grid-cols-3 gap-8 text-gray-300">
+            <!-- Paso 1 -->
+            <div class="bg-gray-900 bg-opacity-80 p-6 rounded-lg neon-box hover:shadow-lg transition">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="text-2xl text-green-400">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3 class="text-xl font-bold neon-text">Paso 1: Aporte</h3>
+                </div>
+                <p>
+                    Para continuar subiendo contenido de calidad, puedes hacer un aporte de <strong>$10 dólares</strong>
+                    a través de los métodos disponibles: <strong>Transferencia</strong> o <strong>Pago en
+                        efectivo</strong>.
+                </p>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="bg-gray-900 bg-opacity-80 p-6 rounded-lg neon-box hover:shadow-lg transition">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="text-2xl text-cyan-400">
+                        <i class="fas fa-unlock-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold neon-text">Paso 2: Acceso al Código</h3>
+                </div>
+                <p>
+                    Tras realizar el aporte, recibirás el código fuente completo. Si necesitas ayuda para instalar o
+                    probar
+                    el sistema, estaré disponible para brindarte soporte técnico personalizado por WhatsApp.
+                </p>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="bg-gray-900 bg-opacity-80 p-6 rounded-lg neon-box hover:shadow-lg transition">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="text-2xl text-purple-400">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold neon-text">Paso 3: Uso del Proyecto</h3>
+                </div>
+                <p>
+                    🎉 ¡Ya puedes integrar el código en tus propios proyectos! <br>
+                    💻 Si tienes dudas o necesitas guía, estaré encantado de ayudarte. <br>
+                    🚀 ¡Gracias por tu confianza y mucho éxito con tu desarrollo!
+                </p>
+            </div>
+        </div>
+
+        <!-- Botón de WhatsApp -->
+        <div class="flex items-center justify-center mt-12">
+            <a href="https://wa.me/78415156"
+                class="neon-button px-6 py-3 rounded-lg text-lg font-bold flex items-center gap-2">
+                <i class="fab fa-whatsapp text-green-400"></i>
+                <span>Contáctame en WhatsApp</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Módulos del sistema -->
+    <div class="container mx-auto my-16">
+        <h2 class="neon-text text-3xl text-center mb-12">Módulos del Sistema</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Módulo 1 -->
+            <div class="module-card neon-box p-6 rounded-lg">
+                <h3 class="neon-text text-xl mb-3">Pantalla de Login</h3>
+                <p class="text-gray-300 mb-2">Verifica lo siguiente:</p>
+                <ul class="futuristic-list">
+                    <li>Validar contraseña (clave por defecto: 1234)</li>
+                    <li>Acepta solo números</li>
+                    <li>No permite números negativos</li>
+                </ul>
+            </div>
+
+            <!-- Módulo 2 -->
+            <div class="module-card neon-box p-6 rounded-lg">
+                <h3 class="neon-text text-xl mb-3">Módulo de Depósito</h3>
+                <p class="text-gray-300 mb-2">Puedes hacer lo siguiente:</p>
+                <ul class="futuristic-list">
+                    <li>Ingresar montos mayores o iguales a 10</li>
+                    <li>Solo se aceptan múltiplos de 10</li>
+                </ul>
+            </div>
+
+            <!-- Módulo 3 -->
+            <div class="module-card neon-box p-6 rounded-lg">
+                <h3 class="neon-text text-xl mb-3">Módulo de Retiro</h3>
+                <p class="text-gray-300 mb-2">Puedes hacer lo siguiente:</p>
+                <ul class="futuristic-list">
+                    <li>Retirar montos mayores o iguales a 10</li>
+                    <li>Solo se aceptan múltiplos de 10</li>
+                </ul>
+            </div>
+
+            <!-- Módulo 4 -->
+            <div class="module-card neon-box p-6 rounded-lg">
+                <h3 class="neon-text text-xl mb-3">Consulta de Saldo</h3>
+                <p class="text-gray-300 mb-2">Puedes hacer lo siguiente:</p>
+                <ul class="futuristic-list">
+                    <li>Ver tu saldo actual</li>
+                </ul>
+            </div>
+
+            <!-- Módulo 5 -->
+            <div class="module-card neon-box p-6 rounded-lg">
+                <h3 class="neon-text text-xl mb-3">Historial de Movimientos</h3>
+                <p class="text-gray-300 mb-2">Puedes hacer lo siguiente:</p>
+                <ul class="futuristic-list">
+                    <li>Visualizar los movimientos del más reciente al más antiguo</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="border-t border-cyan-900 mt-16 py-8 text-center text-gray-400">
+        <p>© 2025 CESAR DEV. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="/assets/js/sistemas.js"></script>
+</body>
+
+</html>

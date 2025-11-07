@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Metadatos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título -->
+    <title>CESAR DEV</title>
+
+    <!-- Frameworks y bibliotecas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+
+<body class="min-h-screen">
+    <!-- Cursor personalizado -->
+    <div id="cursor"
+        class="fixed w-8 h-8 rounded-full border-2 border-neon-primary pointer-events-none transition-transform duration-75 transform -translate-x-1/2 -translate-y-1/2 z-50 mix-blend-difference">
+    </div>
+
+    <!-- Fondo de partículas -->
+    <div id="particles-js" class="absolute inset-0 z-0"></div>
+
+    <!-- Navbar (sección dinámica) -->
+    <div data-include="public/partials/navbar.html"></div>
+
+    <!-- Hero Section (sección dinámica) -->
+    <div data-include="public/secciones/hero.html"></div>
+
+    <!-- Sobre Mí (sección dinámica) -->
+    <div data-include="public/secciones/about.html"></div>
+
+    <!-- Habilidades (sección dinámica) -->
+    <div data-include="public/secciones/habilidades.html"></div>
+
+    <!-- Proyectos (sección dinámica) -->
+    <div data-include="public/secciones/card_proyect.html"></div>
+
+    <!-- Contacto (sección dinámica) -->
+    <div data-include="public/secciones/contacto.html"></div>
+
+    <!-- Footer (sección dinámica) -->
+    <div data-include="public/partials/footer.html"></div>
+
+
+
+    <!-- Script para cargar secciones -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
